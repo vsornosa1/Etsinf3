@@ -1,0 +1,58 @@
+Intro a la Computación Paralela (CPA):
+	(Asignatura creciente, salto importante de OpenMP a MPI)
+
+	* Se trata de ejecutar varias instrucciones de forma simultánea para la resolución de un problema:
+		+ En contra de la arquitectura convencional Von Neumann, las CPA acelera todos los tiempos.
+		- CPA requiere rediseñar los algoritmos y replantear las estructuras de datos.
+
+	* Ejs: Simulaciones complejas de prototipado virtual -> requieren CPA
+		   Procesamiento de una cantidad considerable de datos
+
+
+=========================================================
+
+
+COMPUTACION PARALELA: (LIGA B)
+	Placa > Procesador > Core (Uds de proceso)
+
+	Mem. Compartida: (1a parte del curso)
+		Todos los preocesadores pueden acceder a toda la memoria.
+		Escalabilidad hasta 100s de procesadores.
+		Coste alto.
+
+	Mem. Distribuida: (2a parte del curso)
+		Juntar en una red varios ordenadores con varios procesadores.
+		Cada ordenador tiene acceso a su memoria (y no a la de otros).
+		Escalabilidad hasta 1000s de procesadores.
+		Coste bajo.
+
+
+SUPERCOMPUTACION: (LIGA A)
+	* Los computadores se clasifican según su potencia sostenida medida en Flop/s 
+		(Top 1 = 0.5 EFlop/s)
+
+	* Arquitecturas híbridas que mezclan Mem. compartida con Mem. distribuida
+	
+	* Fun fact: Se pueden pedir horas de supercomputación cada 3 meses a centros españoles de esta liga, para resolver tu problema si de verdad se demuestra que requiere tal calibre.
+
+
+=========================================================
+
+
+TAXONOMÍA DE FLYNN:
+	* Single instruction, single data (operaciones secuenciales)
+	* Multiple instruction, multiple data (CPA total)
+	* Single instruction, multiple data (OpenMP)
+
+
+¿Cómo funcionan las GPU?
+	* Incluyen un orden de miles de núcleos dentro (aka cores).
+	* Hilops ligeros con un cambio de contexto muy rápido.
+	- Prog. difícil
+
+
+METODOLOGÍAS DE CPA:
+	* Utilizaremios OpenMP (basado en directivas)
+	  Paralelización semi automatica (directivas de compilador)
+	  MPI (basado en librerias de funciones)
+

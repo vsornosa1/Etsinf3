@@ -1,0 +1,11 @@
+SEMINARIO C - LENGUAJE ORIENTADO A FUNCIONES:
+	El asterísco (*var) hace referencia a un puntero a memoria.
+	Operador ternario   //  x = a? b : c
+	La sintaxis de los if,for,while y switch son iguales que en Java.
+	
+	1. Se declaran los datos
+		char c, ch;
+		unsigned int n;
+		const float PI = 3.141592;
+	2. 
+
