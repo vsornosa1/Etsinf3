@@ -1,8 +1,0 @@
-Intro a la Ingeniería del SW:
-	Estudiar métodos y herramientas para el desarrollo de Clean code.
-	Entender el ciclo de vida de desarrollo:
-		1. Análisis y modelado
-		2. Diseño
-		3. Implementación
-		4. Pruebas
-
