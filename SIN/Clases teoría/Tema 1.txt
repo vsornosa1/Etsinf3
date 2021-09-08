@@ -1,0 +1,24 @@
+Intro a los Sistemas inteligentes:
+	* Capacidad de entender y aprender relaciones entre hechos y problemas mediante un proceso previo.
+	  Reconocimiento de imagenes/voz/reglas + Redes neuronales
+
+¿Tarea de un Agente Inteliegnte? - Infinidad de aplicaciones reales
+	1. Mediante sensores se percibe el entorno.
+	2. El sistema interpreta una correspondencia.
+	3. Mediante actuadores el sistema actúa sobre el entorno. (Emulador)
+
+
+TEMA 1 - SISTEMAS BASADOS EN REGLAS (SBR):
+	Tipos de conocimientos: Declarativo, procedural
+		1. Procedural (Rollo C): COMO es algo, Bucles, funciones y demás, basic...
+		2. Declarativo (Rollo Prolog): COMO hacer algo, incluye info sobre como resolver un problema.
+
+	Se componen de 3 elementos:
+		1. (BH) Base de Hechos: Representa la info en un momento concreto (como está la partida en ese momento)
+		2. (BR) Base de Reglas: Representa posibles acciones (las reglas del juego)
+		3. Motor de Inferencia: Representa las situaciones posibles ACTUALES (que se hace con las reglas en ese momento)
+	
+	Reglas de tipo if => then:
+		p1^p2^...pn => a1^a2^...an
+
+
