@@ -1,0 +1,36 @@
+UD 1.2 - PRESENTACIÓN INFORMAL DE UNA BD RELACIONAL:
+	
+	+ Sencillez, Info situada en una tabla distribuida en filas y columnas
+	- Todos los valores tienen que ser del mismo tipo de datos
+
+	ALGEBRA RELACIONAL:
+		* Lenguaje de interrogación para el uso de BBDD relacionales.
+
+		OPERADORES CONJUNTISTAS (aka BINARIOS): - Liga B
+			Unión (u): 
+				Tabla1 u Tabla2 -> La suma de las FILAS de ambas tablas.
+			Intersección (n):
+				Tabla1 n Tabla2 -> La coincidencia de las FILAS de ambas tablas.
+			Diferencia (-):
+				Tabla1 - Tabla2 -> Tabla con filas que aparecen en Tabla1 que no esten en Tabla2 
+			Producto cartesiano (x):
+				*Dadas dos tablas que no tengan nombres de columna iguales
+				Tabla1 - Tabla2 -> Tabla con tantas columnas como tengan las tablas 
+									y con todas las filas que se puedan construir con una fila de la primera y una de la segunda.
+			Concatenación: (ver adjunto Ejemplo Concatenación)
+				Combina info de las 2 tablas y está representado como una x redondeada seguida del atributo en común.
+
+			Extra! Renombrar columnas:
+				T((C,A) , (D,B)) -> Cambiar de nombre la columna 'C' por columna 'A' 
+									y cambiar de nombre la columna 'D' por columna 'B'.
+
+
+		OPERADORES RELACIONALES (aka UNARIOS): - Liga A
+			Selección:
+				R DONDE laCondición -> Devuelve las filas que satisfacen laCondición.
+			Proyección:	
+				R[col1, col2, ..., colN] -> Devuelve solo las columnas seleccionadas entre [].
+
+
+		1. Obtener el DNI, el nombre y la edad del Profesor de dni 453.
+			Profesor[DNI, nombre, edad] DONDE dni=453
