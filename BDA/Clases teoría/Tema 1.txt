@@ -17,11 +17,11 @@ UD 1.2 - PRESENTACIÓN INFORMAL DE UNA BD RELACIONAL:
 				*Dadas dos tablas que no tengan nombres de columna iguales
 				Tabla1 - Tabla2 -> Tabla con tantas columnas como tengan las tablas 
 									y con todas las filas que se puedan construir con una fila de la primera y una de la segunda.
-			Concatenación: (ver adjunto Ejemplo Concatenación)
+			Concatenación: (ver adjunto 'Ejemplo concatenación.png')
 				Combina info de las 2 tablas y está representado como una x redondeada seguida del atributo en común.
 
 			Extra! Renombrar columnas:
-				T((C,A) , (D,B)) -> Cambiar de nombre la columna 'C' por columna 'A' 
+				T((C,A) , (D,B)) -> Cambiar de nombre la columna 'C' por columna 'A'.
 									y cambiar de nombre la columna 'D' por columna 'B'.
 
 
