@@ -34,3 +34,9 @@ UD 1.2 - PRESENTACIÓN INFORMAL DE UNA BD RELACIONAL:
 
 		1. Obtener el DNI, el nombre y la edad del Profesor de dni 453.
 			Profesor[DNI, nombre, edad] DONDE dni=453
+
+
+	SQL:
+		INSERT INTO nombreTabla (col1,col2) VALUES ('valorColumna1' , 'valorColumna2');
+		DELETE FROM nombreTabla WHERE col=valorColumna;
+		UPDATE nombreTabla SET col1="valorColumna1" WHERE col2="valorColumna2";
