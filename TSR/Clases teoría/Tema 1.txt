@@ -1,0 +1,60 @@
+Intro a TSR:
+	* Diseño y construcción de sistemas distribuidos (SSDD)
+	* Middleware para conectar las piezas de un puzle con dificultad elevada. (T3)
+	  Y aquí es cuando llega la Prog. asíncrona para la implementación de componentes. (T2)
+
+
+SISTEMA DISTRIBUIDO:
+	*Cada agente del SD es un proceso secuencial que avanza a su ritmo (estado independiente).
+	Main características de un SD:
+		1. Mejora del rendimiento:
+			Subdividir un problema en tareas más pequeñas incrementa la eficiencia.
+		2. Mayor disponibilidad:
+			Si un sistema falla, hay más ordenadores en el SD para sustituir esa perdida.
+		3. Compartición de recursos:
+			Al tener memoria compartida, los recursos puueden tambien ser compartidos desde cualquier nodo del SD.
+
+	ÁREAS DE APLICACIÓN:
+		1. WORLD WIDE WEB (WWW):
+			Modelo cliente/servidor
+			Clientes = envían y reciben peticiones
+		2. REDES DE SENSORES:
+			Básicamente sistemas embedidos/empotrados que dependen de sensores para el In/Output de la info.
+		3. INTERNET OF THINGS (IoT):
+			Todos los dispositivos con conectividad e interoperabilidad pueden conectarse entre sí dando lugar a la creación de una red de tamaño considerable.
+		4. COMPUTACIÓN COOPERATIVA:
+			Una gran parte de los recursos computacionales se infrautiliza (muchas horas sin hacer nada) -> Los servidores pueden obtener una instancia de esos problemas y otros nodos en la red pueden suscribirse para resolver tareas -> Los servidores distribuyen las tareas entre los suscriptores y recoge los resultados.
+		5. CLUSTERS ALTAMENTE DISPONIBLES:
+			Ciertos servicios como bancos, multinacionales o redes médicas necesitan de un sistema que esté disponible ya que un fallo, y por tanto, una caída del sistema, no es permisible.
+			+ Seguros (incluyen info delicada) y estables a nivel de disponibilidad.
+			- Aún así, sigue siendo una alternativa costosa (sueldos de los sysAdmins, coste de la energía eléctrica full-time...) y por eso mismo, hay gente que no tiene dinero para comprarse una casa y decide pagar un alquiler... 
+			Aquí es cuando llega el Cloud Computing.
+
+
+CLOUD COMPUTING (CC):
+	Combinaciones de recursos que simulan un conjunto de máquinas. Se alquilan los servicios como si fuesen frutas en un mercado (3 de x, 2 de y, 5 de z...)
+
+	Objetivo del CC:
+		Poder proporcionar los servicios SW de forma cada vez más sencilla y eficiente.
+
+
+	4 roles en el ciclo de vida de un servicio SW:
+		A) Desarrollador -> Implanta los componentes de las aplicaciones.
+		B) SysAdmin -> Configurador de cada pieza de HW y SW en el lugar apropiado.
+		C) Proveedor de servicios -> Decide características y componentes del servicio SW.
+		D) Usuario -> Simplemente consume.
+
+
+	EVOLUCIÓN SERVICIOS SW: (De antiguo a actual)
+		1. Mainframes en centros de cálculo:
+			- Hoy en día, algo bastante inútil y anticuado.
+			* Los propios usuarios son los propios sysAdmins ya que el uso es personal.
+			Ejemplo: Tener un mainframe donde se configuran x máquinas con n características para crear un servicio creado internamente por los mismos propietarios.
+
+		2. PCs normales:
+			* El usuario emplea el rol de sysAdmin y de proveedor de servicios en su propio PC.
+			- El ordenador se infrautiliza por el uso deficiente de los recursos.
+
+		3. Centros de cómputo empresariales (Clusters altamente disponibles):
+			* Se usan básicamente para empresas rollo bancos (usuarios) que necesitan su propio sistema y no les sale rentable alquilar servicios.
+			- Obviamente, lo privado no es precisamente barato...
