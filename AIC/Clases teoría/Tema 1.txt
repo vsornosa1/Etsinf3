@@ -1,0 +1,36 @@
+Intro a la Arquitectura e Ingeniería de Computadores:
+	Mejorar un procesador pasa por segmentarlo = Acelerar, PERO tiene algunos problemas...
+	Servidores < Clusters < Supercomputadores
+
+
+	Requisitos de un computador:
+		1. Su clase (Qué precisa)
+		2. Nivel de compatibilidad
+			Codigo fuente - Necesidad de recvompilar el SW
+			Binario - No necesita SW nuevo
+		3. EL SO a utilizar
+			Espacio direccionamiento
+			Gestión de memoria y procesos
+
+
+	Temas a tener en cuenta:
+		1. Tecnologías (transistores de 5nm)
+			Desarrollar procesadires específicos para tareas específicas.
+
+		2. Coste 
+			A menor escala y a mayor superficie, mayor coste (superficie^4)
+
+		3. Consumo y disipación de calor:
+			Potencia por transistor = Pot. dinámica + Pot. estática
+				Pot. dinámica = 0.5 * C * V^2 * f
+				Pot. estática = I(fuga) * V
+
+
+	El sysAdmin lo que le interesa es tener mucho trabajos por ud. tiempo:
+		(Px) Productividad = 1 / Tiempo de ejecución
+		[Siempre se escoge el más lento en caso de comparación de sistemas]
+			S = Ty/Tx = Px/Py = 1 + n/100
+
+
+	Prestaciones del procesador:
+		T(ejec) = nInstr * CPI * T(reloj)
