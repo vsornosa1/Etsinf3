@@ -33,4 +33,4 @@ Intro a la Arquitectura e Ingeniería de Computadores:
 
 
 	Prestaciones del procesador:
-		T(ejec) = nInstr * CPI * T(reloj)
+		T(exe) = nInstr * CPI * T(reloj) 
