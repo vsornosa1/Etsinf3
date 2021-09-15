@@ -1,0 +1,16 @@
+ARQUITECTURA DEL SW MULTICAPA:
+	-> Organización de los sistemas a medida que se hacen más complejos en sus distintos niveles de abstracción.
+	-> Ejemplos:
+		2 capas: Cliente/servidor
+		Multicapa: Acceso a datos, gestión de esos datos, servidor de aplicaciones, clientes...
+
+	Arquitectura basadas en capas:
+		- A pesar de mejorar la organización, puede incrementar el coste.
+		Cerrada: Solamente usa características de la capa inmediatamente inferior.
+		Abierta: Puede usar características de cualquier capa.
+
+	Se suele usar Arquitectura de 3 capas:
+		1. Presentación de los datos mediante una (G)UI.
+		2. Lógica de negocio - toda la funcionalidad del sistema.
+		3. Acceso a datos como podría ser cualquier Base de datos o un servicio en la nube.
+
