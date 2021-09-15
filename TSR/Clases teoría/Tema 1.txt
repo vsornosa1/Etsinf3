@@ -31,6 +31,7 @@ SISTEMA DISTRIBUIDO:
 			Aquí es cuando llega el Cloud Computing.
 
 
+
 CLOUD COMPUTING (CC):
 	Combinaciones de recursos que simulan un conjunto de máquinas. Se alquilan los servicios como si fuesen frutas en un mercado (3 de x, 2 de y, 5 de z...)
 
@@ -45,16 +46,83 @@ CLOUD COMPUTING (CC):
 		D) Usuario -> Simplemente consume.
 
 
-	EVOLUCIÓN SERVICIOS SW: (De antiguo a actual)
-		1. Mainframes en centros de cálculo:
-			- Hoy en día, algo bastante inútil y anticuado.
-			* Los propios usuarios son los propios sysAdmins ya que el uso es personal.
-			Ejemplo: Tener un mainframe donde se configuran x máquinas con n características para crear un servicio creado internamente por los mismos propietarios.
 
-		2. PCs normales:
-			* El usuario emplea el rol de sysAdmin y de proveedor de servicios en su propio PC.
-			- El ordenador se infrautiliza por el uso deficiente de los recursos.
+EVOLUCIÓN SERVICIOS SW: (De antiguo a actual)
+	1. Mainframes en centros de cálculo:
+		- Hoy en día, algo bastante inútil y anticuado.
+		* Los propios usuarios son los propios sysAdmins ya que el uso es personal.
+		Ejemplo: Tener un mainframe donde se configuran x máquinas con n características para crear un servicio creado internamente por los mismos propietarios.
 
-		3. Centros de cómputo empresariales (Clusters altamente disponibles):
-			* Se usan básicamente para empresas rollo bancos (usuarios) que necesitan su propio sistema y no les sale rentable alquilar servicios.
-			- Obviamente, lo privado no es precisamente barato...
+	2. PCs normales:
+		* El usuario emplea el rol de sysAdmin y de proveedor de servicios en su propio PC.
+		- El ordenador se infrautiliza por el uso deficiente de los recursos.
+
+	3. Centros de cómputo empresariales (Clusters altamente disponibles):
+		* Se usan básicamente para empresas rollo bancos (usuarios) que necesitan su propio sistema y no les sale rentable alquilar servicios.
+		- Obviamente, lo privado no es precisamente barato...
+
+
+
+XaaS (loQueSea As A Service):
+	1. SaaS (Software)
+		* Claramente definido entre usuario y servicios (se contrata el SW sin saber muy bien que está pasando ahí fuera)
+			Es como tener una versión de una tecnología disponible a traves de la web sin tener que tenerla instalada ni actualizada como tal.
+		- Se reservan recursos ante una alta demanda (no se explota el 100% de la capacidad computacional contratada)
+		+ SaaS permite GUIs más atractivas + mayor escalabilidad con menor carga en el servidor)
+
+	2. IaaS (Infrastructure)
+		* Alquiler de n máquinas con determinadas características que quiera el usuario.
+			Ej: Alquiler de Servidor web, SW de E-commerce, base de datos... + luego personalizar por tu cuenta todo.
+		+ Te das cuenta si la carga alquilada es suficiente o deficiente.
+		- No se adecua a altibajos de carga:
+			Única solucion: Depósito de VMs para utilizar las mismas en proporción a la carga de la propia web.
+
+	3. SaaS sobre IaaS - versión manual
+		* La idea es más avanzada ya que consiste en el pago por uso. 
+			Utiliza/devuelve recursos en proporcióna a la carga (aka Elasticidad)
+
+	4. PaaS (Platform) - versión automática
+		* A través de una API en la infrastructura donde el propio programa gestiona el alquiler del servicio.
+		No hay un sistema PaaS como tal que sea bueno suficiente para ser estudiado.
+
+
+
+PARADIGMAS DE LA PROGRAMACIÓN:
+	-> Para que sea escalable, un servidor no debe suspenderse, debe ser capaz de gestionar peticiones simultáneas (analogía del camarero del bar).
+	-> Este tipo de bloqueo en el código del agente provoca ralentizar todo el sistema... y eso obv no es bueno.
+
+	TIPOS DE SERVIDORES:
+		CONCURRENTES:
+			+ Cada petición es servida con su propio hilo.
+			- Debe de haber memoria compartida en un estado global.
+
+		ASÍNCRONICOS:
+			* Guardas = Manejador de eventos
+			+ Sólo existe 1 hilo en ejecución (atenderá las peticiones en base a una cola FIFO sin prioridad - callbacks)
+			+ Full secuencial, simple y sin memoria compartida que pueda llevar a errores.
+			+ Mayor escalabilidad (Node.js) y el modelo que más se acerca al funcionamiento real de un SD.
+			- Es necesario tener un SO y un lenguaje/librería como Node.js que soporte la prog asincrónica.
+
+
+
+CASO DE ESTUDIO - WIKIPEDIA:
+	Random fact: Llegó a 1GPeticiones en un día.
+	+ Usa LAMP (full gratuito) - Servidor Linux + Apache + MySQL/MariaDB + PHP
+		0. Proceso Apache + proceso MySQL a la espera de recibir carga.
+		1. Cliente envía petición HTTP al servidor Apache.
+		2. El servidor Apache despierta por la alarma del SO para gestionar esa petición.
+		3. Apache determina que debe ejecutarse en un programa PHP. (No se suspende)
+		4. El programa se ejecuta enviando órdenes SQL que recibe el SGBD.
+		5. El servidor MySQL es despertado por el SO, recoge esa petición y la ejecuta devolviendo la respuesta al programa PHP.
+		6. Repite 4 y 5. + PHP confecciona una página de respuesta que Apache envía por la red.
+		7. Cliente recibe el resultado y puede visualizarlo por pantalla.
+
+		Linux -> SO de tipo UNIX
+		Apache -> Servidor web, gestiona peticiones HTTP, actua como cliente de MySQL
+		MySQL -> Gestor de BBDD relacionales
+		PHP -> Lenguaje de scripting ligero
+
+	* Picos de poder atender cargas de entre 250-1600 Gbps -> Se mejora el rendimiento con replicación (T5)
+	
+	
+	
