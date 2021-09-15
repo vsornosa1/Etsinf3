@@ -21,4 +21,47 @@ TEMA 1 - SISTEMAS BASADOS EN REGLAS (SBR):
 	Reglas de tipo if => then:
 		p1^p2^...pn => a1^a2^...an
 
+CLIPS:
+	-> Permite crear la BH y la BR
+	BH en CLIPS:
+		(Hecho ordenado) -> SÓLO 1 PARÉNTESIS/ HECHO ORDENADO
+		deffacts es totalmente inútil solo sirve para dar nombres y si hay errores te dice en qué deffact está el error
+	BR en CLIPS: (2 partes)
+		1. ANTECEDENTE (Izq) 
+			-> Condiciones a satisfacer para que la regla sea aplicable
+			-> PATRONES: 
+				Las variables se representan con el símbolo ? seguido del nombre de la variable.
+
+				(defrule move_cell_to_left   ;;blank to right
+					(puzzle ?x0 ?y0 0)
+					(puzzle ?x1 ?y1 ?cell)
+					(test (and (< ?y0 3)(= ?x0 ?x1)))
+					(test (= ?y1 (+ ?y0 1)))
+				)
+
+				(defrule pour_Y_into_X
+					(contents jug X ?x jug Y ?y)
+					(capacity jug X ?cap_X)
+					(test (and (< ?x ?cap_X)(> ?y 0)))
+					(test (<= (+ ?x ?y) ?cap_X))
+				)
+		2. CONSECUENTE (Derecha) 
+			-> Acciones que se ejecutarán cuando la regla sea aplicable
+			-> ASSERT AÑADE y RETRACT ELIMINA de la BH: 
+				(defrule paint-block
+					?fa <- (block A colour red)
+					?fb <- (available paint green)
+				  =>
+					(retract ?fa ?fb)
+					(assert (block A colour green))
+					(printout t "Bloque pintado de verde" crlf))
+
+		3. PATTERN MATCHING:
+			Los patrones pueden contener:
+			-> Constantes
+			-> Variables simples/mono-valuadas: La típica de ?x
+			-> Varibales multi-valuadas: $?x PUEDEN SER LENGTH=0
+			-> Comodines/wildcards: 
+				Simplemente ? ó $?
+				Variables especiales que pueden casar con cualquier cte.
 
