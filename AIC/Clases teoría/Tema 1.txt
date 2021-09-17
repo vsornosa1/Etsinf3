@@ -1,5 +1,5 @@
 Intro a la Arquitectura e Ingeniería de Computadores:
-	Mejorar un procesador pasa por segmentarlo = Acelerar, PERO tiene algunos problemas...
+	-> Mejorar un procesador pasa por segmentarlo = Acelerar, PERO tiene algunos problemas...
 	Servidores < Clusters < Supercomputadores
 
 
@@ -54,7 +54,7 @@ LEY DE AMDAHL - Acelerar funciones de un programa (optmización de tiempos)
 
 
 LA MEDIDA DE LAS PRESTACIONES:
-	Se escogen programas de prueba llamados Workloads/Benchmarks (mejor que sean programas reales) para evaluar prestaciones.
+	-> Se escogen programas de prueba llamados Workloads/Benchmarks (mejor que sean programas reales) para evaluar prestaciones.
 	
 	SPEC media geometrica = sqrtN(PRODUCTORIO[0-N](tRef/ti))
 	MIPS = nInstr[aka i] / T(exe) * 10^6
@@ -66,5 +66,32 @@ LA MEDIDA DE LAS PRESTACIONES:
 		   = nInstrComaFlotante[aka i] / (nInstr[aka i] * CPI * T(reloj)) * 10^6
 		   = 1 / CPI * T(reloj) * 10^6
 		   = f / CPI * 10^6
+
+
+DISEÑO DE LOS JUEGOS DE INSTRUCCIÓN:
+	-> Interfaz entre el programa y la ruta de datos.
+	-> Las instrucciones son producto del compilador.
+	-> Los datos están situados en el Banco de registros (MIPS64) o en direcciones de memoria (x86).
+		+ Esto permite la compilación eficiente.
+
+	JUEGO DE INST. RISC (incluye MIPS):
+		MIPS64: Se introduce el tipo double (64b=8B) a parte de los habituales byte, half y word.
+		-> Optimizado para 32 bits
+		-> Muchos registros de longitud fija
+		-> Usa el modelo L/S (Load/Store):
+			Las instrucciones tienen 3 operandos.
+			Más nInstr[aka i]
+			Menos Tiempo de circuiteo y menos cantdad de trabajo por instrucción.
+
+
+
+	JUEGO DE INST. Intel Architecture (IA):
+		-> Formato de instrucciones variable
+		-> Pocos registros de longitud variable
+		-> Usa el modelo R/M (Registro/Memoria)
+			Las instrucciones sólo tienen 2 operandos.
+			Instrucción MOV para transportar datos.
+			Menos nInstr[aka i]
+			Más Tiempo de circuiteo y más cantdad de trabajo por instrucción.
 
 
