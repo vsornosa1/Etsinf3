@@ -1,0 +1,97 @@
+Intro a la Arquitectura e Ingeniería de Computadores:
+	-> Mejorar un procesador pasa por segmentarlo = Acelerar, PERO tiene algunos problemas...
+	Servidores < Clusters < Supercomputadores
+
+
+REQUISITOS DE UN COMPUTADOR:
+	1. Su clase (Qué precisa)
+	2. Nivel de compatibilidad
+		Codigo fuente - Necesidad de recvompilar el SW
+		Binario - No necesita SW nuevo
+	3. EL SO a utilizar
+		Espacio direccionamiento
+		Gestión de memoria y procesos
+
+
+TEMAS A CONSIDERAR:
+	1. Tecnologías (transistores de 5nm)
+		Desarrollar procesadires específicos para tareas específicas.
+
+	2. Coste 
+		A menor escala y a mayor superficie, mayor coste (superficie^4)
+
+	3. Consumo y disipación de calor:
+		Potencia por transistor = Pot. dinámica + Pot. estática
+			Pot. dinámica = 0.5 * C * V^2 * f
+			Pot. estática = I(fuga) * V
+
+
+El sysAdmin lo que le interesa es tener mucho trabajos por ud. tiempo:
+	(Px) Productividad = 1 / Tiempo de ejecución
+	[Siempre se escoge el más lento en caso de comparación de sistemas]
+		S = Ty/Tx = Px/Py = 1 + n/100
+
+
+Prestaciones del procesador:
+	T(exe) = nInstr[aka i] * CPI * T(reloj) 
+
+
+LEY DE AMDAHL - Acelerar funciones de un programa (optmización de tiempos)
+	t' = t(1-F) + tF/S
+	s' = t/t' = 1 / (1-F)+(F/S) = 1 / (F1/S1) + (F2/S2)
+		F = Un componente que ocupa una (F)racción de tiempo F.
+		S = Multiplicador de aceleración de esa fracción de tiempo
+			S1 = Ghz1 / Ghz2
+			S2 = S1 * (nucl1/nucl2) -> SI FUERA PARALELIZABLE
+		t' = Tiempo del proceso resultante despues de acelerar el componente.
+		s' = Aceleración global
+
+	Principio de localidad de referencia:
+			-> El 90% del tiempo se ejecuta el 10% del código,
+			-> Por lo tanto conviene optimizar esa parte del código que se repite tanto.
+
+	-> En las relaciones Coste(x)-Prestaciones(y), obv es mejor tener a menor coste una mayor prestación.
+
+
+LA MEDIDA DE LAS PRESTACIONES:
+	-> Se escogen programas de prueba llamados Workloads/Benchmarks (mejor que sean programas reales) para evaluar prestaciones.
+	
+	SPEC media geometrica = sqrtN(PRODUCTORIO[0-N](tRef/ti))
+	MIPS = nInstr[aka i] / T(exe) * 10^6
+		 = nInstr[aka i] / (nInstr[aka i] * CPI * T(reloj)) * 10^6
+		 = 1 / CPI * T(reloj) * 10^6
+		 = f / CPI * 10^6
+
+	MFLOPS = nInstrComaFlotante[aka i] / T(exe) * 10^6
+		   = nInstrComaFlotante[aka i] / (nInstr[aka i] * CPI * T(reloj)) * 10^6
+		   = 1 / CPI * T(reloj) * 10^6
+		   = f / CPI * 10^6
+
+
+DISEÑO DE LOS JUEGOS DE INSTRUCCIÓN:
+	-> Interfaz entre el programa y la ruta de datos.
+	-> Las instrucciones son producto del compilador.
+	-> Los datos están situados en el Banco de registros (MIPS64) o en direcciones de memoria (x86).
+		+ Esto permite la compilación eficiente.
+
+	JUEGO DE INST. RISC (incluye MIPS):
+		MIPS64: Se introduce el tipo double (64b=8B) a parte de los habituales byte, half y word.
+		-> Optimizado para 32 bits
+		-> Muchos registros de longitud fija
+		-> Usa el modelo L/S (Load/Store):
+			Las instrucciones tienen 3 operandos.
+			Más nInstr[aka i]
+			Menos Tiempo de circuiteo y menos cantdad de trabajo por instrucción.
+
+
+
+	JUEGO DE INST. Intel Architecture (IA):
+		-> Formato de instrucciones variable
+		-> Pocos registros de longitud variable
+		-> Usa el modelo R/M (Registro/Memoria)
+			Las instrucciones sólo tienen 2 operandos.
+			Instrucción MOV para transportar datos.
+			Menos nInstr[aka i]
+			Más Tiempo de circuiteo y más cantdad de trabajo por instrucción.
+
+
