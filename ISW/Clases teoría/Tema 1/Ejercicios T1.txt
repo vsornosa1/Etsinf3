@@ -1,0 +1,17 @@
+EJERCICIOS T1
+
+1.  Buscar un ejemplo real de mal SW
+	EXCESO DE RADIACIÓN EN EL THERAC-25 MATÓ A CINCO PACIENTES.
+		Por un error en su software de control suministró un exceso de radiación a varios pacientes provocando la muerte de al menos cinco de ellos. Causando errores en el control de la concurrencia de las diferentes rutinas que se ejecutaban en paralelo, produciendo una condición de carrera que inducía a la máquina a emitir radiación a potencia máxima si una determinada secuencia de eventos inesperados se producía.
+
+2. Dos definiciones con nuestras palabras para Ing. del SW
+	1) Una rama de la ingeniería que abarca desde la planificación de un proyecto de software hasta las iteraciones finales del mismo.
+	2) Es el estudio, desarrollo y creación de software, de manera que se alcance un producto de calidad.
+
+
+TEST: (Ver preguntas en )
+1b	6b
+2d	7b
+3c	8d
+4d	9d
+5a	10b
