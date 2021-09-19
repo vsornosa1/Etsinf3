@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <omp.h>
 
 /* Funcion f(x) de la cual se quiere calcular la integral */
 double f(double x)
@@ -47,11 +48,14 @@ double calcula_integral2(double a, double b, int n)
 int main(int argc, char *argv[])
 {
    double a, b, result;
-   int n, variante;
+   int n, nt, variante;
+   
+   nt = atoi(argv[2]);
+   omp_set_num_threads(nt);
+   printf("Número de hilos fuera de la región paralela de OpenMP = %d\n", omp_get_num_threads());
 
    if (argc<2) {
       fprintf(stderr, "Numero de argumentos incorrecto\n");
-      return 1;
    }
    if (argc>2) n=atoi(argv[2]);
    else n=100000;
@@ -59,19 +63,24 @@ int main(int argc, char *argv[])
    b=1;
 
    variante=atoi(argv[1]);
-   switch (variante) {
-      case 1:
-         result = calcula_integral1(a,b,n);
-         break;
-      case 2:
-         result = calcula_integral2(a,b,n);
-         break;
-      default:
-         fprintf(stderr, "Numero de variante incorrecto\n");
-         return 1;
+   #pragma omp parallel
+   {
+      printf("ID del hilo ejecutando región paralela = %d\n", omp_get_thread_num());
+      switch (variante) {
+         case 1:
+	    result = calcula_integral1(a,b,n);
+	    break;
+         case 2:
+	    result = calcula_integral2(a,b,n);
+	    break;
+         default:
+	    fprintf(stderr, "Numero de variante incorrecto\n");
+      }
+   
    }
-
+   
+   printf("Número máximo de hilos en ejecución = %d\n", omp_get_max_threads());
    printf("Valor de la integral = %.12f\n", result);
-
+   
    return 0;
 }
