@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
    if (argc<2) {
       fprintf(stderr, "Numero de argumentos incorrecto\n");
    }
-   if (argc>2) n=atoi(argv[2]);
+   if (argc>3) n=atoi(argv[3]);
    else n=100000;
    a=0;
    b=1;
@@ -68,13 +68,13 @@ int main(int argc, char *argv[])
       printf("ID del hilo ejecutando región paralela = %d\n", omp_get_thread_num());
       switch (variante) {
          case 1:
-	    result = calcula_integral1(a,b,n);
-	    break;
+   result = calcula_integral1(a,b,n);
+   break;
          case 2:
-	    result = calcula_integral2(a,b,n);
-	    break;
+   result = calcula_integral2(a,b,n);
+   break;
          default:
-	    fprintf(stderr, "Numero de variante incorrecto\n");
+   fprintf(stderr, "Numero de variante incorrecto\n");
       }
    
    }
