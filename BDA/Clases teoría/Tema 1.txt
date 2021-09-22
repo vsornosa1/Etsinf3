@@ -40,3 +40,14 @@ UD 1.2 - PRESENTACIÓN INFORMAL DE UNA BD RELACIONAL:
 		INSERT INTO nombreTabla (col1,col2) VALUES ('valorColumna1' , 'valorColumna2');
 		DELETE FROM nombreTabla WHERE col=valorColumna;
 		UPDATE nombreTabla SET col1="valorColumna1" WHERE col2="valorColumna2";
+
+
+
+
+EJERCICIOS TAREA 2:
+	3. PROFESOR(nombre, nombre_prof)[dni, nombre] CONCATdni DOCENCIA DONDE gteo > gpra
+	4. PROFESOR(nombre, nombre_prof)[dni, nombre] CONCATdni DOCENCIA CONCATcod_asg ASIGNATURA(cod_asg, cod_asig) DONDE teoría > practicas
+	5. ASIGNATURA[cod_asg, nombre] CONCATcod_dep DEPARTAMENTO DONDE cod_asg=11784
+	6. ...
+	7. PROFESOR(nombre, nombre_prof)[dni, nombre] CONCATdni DOCENCIA CONCATcod_asg ASIGNATURA(cod_asg, cod_asig) DONDE teoría <= 3
+	8. 
