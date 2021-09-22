@@ -1,0 +1,39 @@
+MODELADO A OBJETOS CON UML:
+	Modelo = Simplificación de la realidad para comprender mejor el sistema que se está desarrollando.
+
+	-> Realidad, análisis, diseño e implementación
+
+
+
+SISTEMA SW OO:
+	VISIÓN ESTÁTICA:
+		1. Objetos
+			-> Entidades que existen en el mundo real.
+			-> Tienen ID, estructura y estado.
+		2. Clases
+			-> Describe un conjunto de objetos con propiedades en común.
+			-> Se pueden establecer relaciones entre clases.
+
+	VISIÓN DINÁMICA:
+		La comunicación entre objetos se establece mediante comunicaciones entre los mismos.
+
+
+
+UML:
+	Objetivos: Visualizar, especificar, construir y documentar.
+	Triangulo del éxito:
+		-> Notación (UML) + Metodología + Herramienta
+
+	TIPOS DE DIAGRAMAS:
+		D. DE CLASE: (A partir de la diapo 20 mejor ver el ppt adjunto -> hay dibujos)
+			-> Muestra las clases + relaciones entre ellas.
+			-> Herramienta principal de los métodos OO.
+
+			Compartimentos de una CLASE:
+				1. Nombre
+				2. Atributos
+					- Privados
+					# Protegidos
+					+ Públicos
+				3. Métodos
+
