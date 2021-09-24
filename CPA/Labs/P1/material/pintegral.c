@@ -62,28 +62,29 @@ int main(int argc, char *argv[])
    a=0;
    b=1;
    
-   variante=atoi(argv[1]);
    #pragma omp parallel
    {
       int id_hilo = omp_get_thread_num();
       if(id_hilo==0)
          printf("Número de hilos: %d\n", omp_get_num_threads());
-        
-      //printf("ID del hilo ejecutando región paralela = %d\n", id_hilo);
-         
+      //printf("ID del hilo ejecutando región paralela = %d\n", id_hilo);    
    }
-      
-      switch (variante) {
-         case 1:
-	    result = calcula_integral1(a,b,n);
-	    break;
-         case 2:
-	    result = calcula_integral2(a,b,n);
-	    break;
-         default:
-	    fprintf(stderr, "Numero de variante incorrecto\n");
-      }
    
+   variante=atoi(argv[1]);
+   double t;
+   t = omp_get_wtime(); 
+   switch (variante) {
+    case 1:
+       result = calcula_integral1(a,b,n);
+       break;
+    case 2:
+       result = calcula_integral2(a,b,n);
+       break;
+    default:
+       fprintf(stderr, "Numero de variante incorrecto\n");
+   }
+   t = omp_get_wtime() - t;
+   printf("El tiempo de ejecución ha sido de %.12f segundos\n", t);
    
    printf("Número máximo de hilos en ejecución = %d\n", omp_get_max_threads());
    printf("Valor de la integral = %.12f\n", result);
