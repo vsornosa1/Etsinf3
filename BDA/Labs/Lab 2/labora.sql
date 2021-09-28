@@ -32,6 +32,13 @@ WHERE titulo IS null;
 ----------------------------------------------------------------------
 
 
+-- 9. Cuántos autores han escrito alguna obra con la palabra “ciudad” en su título
+select count(distinct a.nombre) "autores"
+from obra o, autor a, escribir e
+where a.autor_id = e.autor_id
+    and o.cod_ob = e.cod_ob
+    and o.titulo like '%ciudad%';
+
 -- 10. Títulos de obras escritos por el autor 'Camús, Albert' (Manera 1)
 SELECT o.titulo
 FROM autor a, escribir e, obra o
