@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <omp.h>
 
 #define max(a, b) ((a) > (b) ? (a) : (b))
 #define min(a, b) ((a) < (b) ? (a) : (b))
@@ -88,8 +89,7 @@ int Filtro(int pasos, int radio, struct pixel **ppsImagenOrg, struct pixel **pps
            int n, int m)
 {
   int i, j, k, l, p, tot;
-
-  struct { int r, g, b; } resultado;
+  int r, g, b;
   int **ppdBloque, v;
 
   if ((ppdBloque = (int **)malloc(sizeof(int *) * (2*radio + 1))) == NULL) {
@@ -104,29 +104,36 @@ int Filtro(int pasos, int radio, struct pixel **ppsImagenOrg, struct pixel **pps
   for (i = -radio; i <= radio; i++)
     for (j = -radio; j <= radio; j++)
       ppdBloque[i + radio][j + radio] = (radio - abs(i)) * (radio - abs(i)) + (radio - abs(j)) * (radio - abs(j)) + 1;
-
+      
+  // No tiene sentido paralelizar el bucle de pasos porque una 
+  // iteración depende de la anterior para formar el filtro.
+  // #pragma omp parallel for reduction(+:tot) private(i,j,r,g,b,l,v)
   for (p = 0; p < pasos; p++) {
+    #pragma omp parallel for private(j,k,tot,r,g,b,l,v)
     for (i = 0; i < n; i++) {
+      // #pragma omp parallel for private(k,tot,r,g,b,l,v)
       for (j = 0; j < m; j++) {
-        resultado.r = 0;
-        resultado.g = 0;
-        resultado.b = 0;
+        r = 0;
+        g = 0;
+        b = 0;
         tot = 0;
+        // #pragma omp parallel for reduction(+:tot,r,g,b) private(l,v)
         for (k = max(0, i - radio); k <= min(n - 1, i + radio); k++) {
+          // #pragma omp parallel for reduction(+:tot,r,g,b) private(v)
           for (l = max(0, j - radio); l <= min(m - 1, j + radio); l++) {
             v = ppdBloque[k - i + radio][l - j + radio];
-            resultado.r += ppsImagenOrg[k][l].r * v;
-            resultado.g += ppsImagenOrg[k][l].g * v;
-            resultado.b += ppsImagenOrg[k][l].b * v;
+            r += ppsImagenOrg[k][l].r * v;
+            g += ppsImagenOrg[k][l].g * v;
+            b += ppsImagenOrg[k][l].b * v;
             tot += v;
           }
         }
-        resultado.r /= tot;
-        resultado.g /= tot;
-        resultado.b /= tot;
-        ppsImagenDst[i][j].r = resultado.r;
-        ppsImagenDst[i][j].g = resultado.g;
-        ppsImagenDst[i][j].b = resultado.b;
+        r /= tot;
+        g /= tot;
+        b /= tot;
+        ppsImagenDst[i][j].r = r;
+        ppsImagenDst[i][j].g = g;
+        ppsImagenDst[i][j].b = b;
       }
     }
     if (p+1 < pasos)
@@ -139,29 +146,38 @@ int Filtro(int pasos, int radio, struct pixel **ppsImagenOrg, struct pixel **pps
 
 int main()
 {
-  struct pixel **ImgOrg, **ImgDst;
-  int n = 2560, m = 1920;
-  int i, rc;
+    
+    struct pixel **ImgOrg, **ImgDst;
+    int n = 2560, m = 1920;
+    int i, rc;
 
-  rc = lee_ppm(IMAGEN_ENTRADA, &ImgOrg, &n, &m);
-  if (rc) { printf("Error al leer el fichero %s\n", IMAGEN_ENTRADA); return 1; }
-  printf("Abierta una imagen de n:%d, m:%d\n", n, m);
+    #pragma omp parallel 
+    {
+    int id_hilo = omp_get_thread_num();
+      if(id_hilo==0)
+         printf("Número de hilos: %d\n", omp_get_num_threads());
+      //printf("ID del hilo ejecutando región paralela = %d\n", id_hilo);
+    }
+    
+    rc = lee_ppm(IMAGEN_ENTRADA, &ImgOrg, &n, &m);
+    if (rc) { printf("Error al leer el fichero %s\n", IMAGEN_ENTRADA); return 1; }
+    printf("Abierta una imagen de n:%d, m:%d\n", n, m);
 
-  ImgDst = (struct pixel **)malloc(n * sizeof(struct pixel *));
-  ImgDst[0] = (struct pixel *)malloc(m * n * sizeof(struct pixel));
-  for (i = 1; i < n; i++)
-    ImgDst[i] = ImgDst[i - 1] + m;
+    ImgDst = (struct pixel **)malloc(n * sizeof(struct pixel *));
+    ImgDst[0] = (struct pixel *)malloc(m * n * sizeof(struct pixel));
+    for (i = 1; i < n; i++)
+      ImgDst[i] = ImgDst[i - 1] + m;
 
-  rc = Filtro(NUM_PASOS, DIST_RADIO, ImgOrg, ImgDst, n, m);
-  if (rc) { printf("Error al aplicar el filtro\n"); return 2; }
+    rc = Filtro(NUM_PASOS, DIST_RADIO, ImgOrg, ImgDst, n, m);
+    if (rc) { printf("Error al aplicar el filtro\n"); return 2; }
 
-  rc = escribe_ppm(IMAGEN_SALIDA, ImgDst, n, m);
-  if (rc) { printf("Error al escribir la imagen\n"); return 3; }
+    rc = escribe_ppm(IMAGEN_SALIDA, ImgDst, n, m);
+    if (rc) { printf("Error al escribir la imagen\n"); return 3; }
 
-  free(ImgOrg[0]);
-  free(ImgDst[0]);
-  free(ImgOrg);
-  free(ImgDst);
-
-  return 0;
+    free(ImgOrg[0]);
+    free(ImgDst[0]);
+    free(ImgOrg);
+    free(ImgDst);
+    return 0;
+  
 }
