@@ -1,6 +1,5 @@
 // net.Socket -> Socket TCP 1
 
-
 const net = require('net');
 
 if (process.argv.length != 4) console.error('4 argumentos son necesarios!')
