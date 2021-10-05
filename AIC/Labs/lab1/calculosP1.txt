@@ -1,0 +1,34 @@
+S = 1.68456s -> 1.7s
+S' = 1.46s
+
+------ Matrix -------
+
+std time -> 3.489s
+SSE time -> 2.389s
+res time -> 0.853s
+
+F = std-res / std = 0.756
+
+----- Benchmarks -----
+
+drhystone (10M)-> 0.643s
+whetstone (10k)-> 0.160s
+
+time make -> 9.322s + 1.175s = 10.407s
+xv -> 0.852 + 0.052 = 0.904s
+
+TIEMPOS DE C
+drhystone    0.643s
+whetstone    0.160s
+gcc          10.407s
+xv           0.904s
+
+MEDIA ARITMÉTICA:
+A -> 13s
+B -> 43.25s
+C -> 3.03s
+
+MEDIA GEOMÉTRICA:
+A -> 6.887s
+B -> 24.34s
+C -> 0.992s
