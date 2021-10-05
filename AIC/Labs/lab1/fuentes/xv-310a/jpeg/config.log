@@ -1,0 +1,51 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:544:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ main(){return(0);}
+ ^~~~
+configure: In function 'is_char_signed':
+configure:1077:5: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+     printf("Hmm, it seems 'char' is not eight bits wide on your machine.\n");
+     ^~~~~~
+configure:1077:5: warning: incompatible implicit declaration of built-in function 'printf'
+configure:1077:5: note: include '<stdio.h>' or provide a declaration of 'printf'
+configure: At top level:
+configure:1083:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ main() {
+ ^~~~
+configure: In function 'main':
+configure:1084:3: warning: implicit declaration of function 'exit' [-Wimplicit-function-declaration]
+   exit(is_char_signed((int) signed_char_check));
+   ^~~~
+configure:1084:3: warning: incompatible implicit declaration of built-in function 'exit'
+configure:1084:3: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure: In function 'is_shifting_signed':
+configure:1126:3: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+   printf("Right shift isn't acting as I expect it to.\n");
+   ^~~~~~
+configure:1126:3: warning: incompatible implicit declaration of built-in function 'printf'
+configure:1126:3: note: include '<stdio.h>' or provide a declaration of 'printf'
+configure: At top level:
+configure:1130:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ main() {
+ ^~~~
+configure: In function 'main':
+configure:1131:3: warning: implicit declaration of function 'exit' [-Wimplicit-function-declaration]
+   exit(is_shifting_signed(-0x7F7E80B1L));
+   ^~~~
+configure:1131:3: warning: incompatible implicit declaration of built-in function 'exit'
+configure:1131:3: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:1155:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ main() {
+ ^~~~
+configure: In function 'main':
+configure:1157:5: warning: implicit declaration of function 'exit' [-Wimplicit-function-declaration]
+     exit(0);
+     ^~~~
+configure:1157:5: warning: incompatible implicit declaration of built-in function 'exit'
+configure:1157:5: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:1158:3: warning: incompatible implicit declaration of built-in function 'exit'
+   exit(1);
+   ^~~~
+configure:1158:3: note: include '<stdlib.h>' or provide a declaration of 'exit'
