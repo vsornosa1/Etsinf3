@@ -1,0 +1,76 @@
+DISEÑO LÓGICO DE LA APLICACIÓN:
+
+-> Fín de la etapa de modelado
+Análisis = Orientado al problema
+Diseño   = Orientado a la solución concreta del problema
+
+Entradas = Diagrama UML
+Salidas  = Diseño comop clases imnplementadas en un lenguaje concreto
+
+public class nombreClase 
+{
+	private tipoAtributo atributo;
+
+	public void setAtributo(tipoAtributo nuevoValor) {
+		atributo = nuevoValor;
+	}
+	public tipoAtributo getAtributo() {
+		return atributo;
+	}
+}
+
+CARDINALIDAD 1-1:
+	No importa el tipo de relación ni la cardinalidad mínima, 
+	solo que la cardinalidad máxima sea 1-1.
+
+Clase asociacion: 
+	A1-X-B1
+		AB tienen:
+			private X refX;
+			...
+
+	A1-X-B1* 
+		A tiene:
+			private ICollection<tipoX> coleccionRefX;
+			void add(tipoX x) { coleccionRefX.add(x); }
+
+		B tiene:
+			private X refX;
+			...
+
+		X tiene referencia a AB:
+			private A refA;
+			private B refB;
+
+
+	A1*-X-B1* 
+		AB tienen: 
+			private ICollection<relacionAB> coleccionRefX;
+			void add(tipoX x) { coleccionRefX.add(x); }
+		X == relacionAB tiene referencia a AB:
+			private A refA;
+			private B refB;
+
+
+Propiedad: Se asigna como public y los getters y setters se definen public o private. (+ compacto)
+Atributo: Se asigna en base a su visibilidad y los getters y setters se definen public.
+
+
+#####################################################################
+
+
+DISEÑO ARQUITECTÓNICO:
+	1. Presentación - Interfaz gráfica de usuario (GUI)
+		-> Conjunto de formularios, pero solo 1 es el MainForm.
+		-> Todos acceden a las interfaces de los servicios que ofrece la capa 2.
+
+	2. Lógica de negocio
+		-> Incluye todas las clases del UML y todos los servcios donde cada servicio gestiona n clases.
+
+    3. Persistencia
+    	-> Conexión de un servicio de la capa 2 con la IDAL (Interfaz del Data Access Layer)
+    	-> Proporciona el acceso a datos mediantes DALs (BBDD, textos, archivos...)
+
+
+Interfaz: Declaración de intenciones
+Clase Servicio: Especializa de la interfaz y le da comportamientos.
