@@ -1,0 +1,112 @@
+#######
+Video 1 -- PATRONES REPOSITORIO + UoW
+#######
+
+Patrón de diseño REPOSITORIO: (IDbSet<TEntity>)
+	Utilizaremos 1 repositorio/cada clase de la lógica que queramos persistir.
+	Encapsular datos de la app desde/hacia una BD relacional.
+
+	public interface IRepository
+	{
+		void Insert<T>(T entity) where T : class;
+		void Delete<T>(T entity) where T : class;
+		void Exists<T>(IComparable id) where T : class;
+		T GetById<T>(IComparable id) where T : class;
+		IEnumerable<T> GetAll<T>() where T : class;
+	}
+
+
+Patrón de diseño UoW (Unit of Work): (DbContext)
+	Utilizaremos una clase UoW.
+	Poder llevar un registro de la modficación de los objetos en el código
+	y así poder sobreescribir dichos cambios.
+	Transparente al repositorio.
+
+	public class UoW
+	
+		public void registerAdded() { ... }
+		public void registerChanged() { ... }
+		public void registerRemoved() { ... }
+		public int Commit() { ... }
+		public int Rollback() { ... }
+
+		private ICollection<RepositoryEntityA> repA;
+		private ICollection<RepositoryEntityB> repB;
+
+
+		void Delete<T>(T entity) where T : class;
+		void Exists<T>(IComparable id) where T : class;
+		T GetById<T>(IComparable id) where T : class;
+		IEnumerable<T> GetAll<T>() where T : class;
+	}
+
+
+
+#######
+Video 2 -- MODELAR TABLAS RELACIONALES A PARTIR DE UNA JERARQUÍA DE HERENCIA
+#######
+
+Opción 1 -> 1 tabla para toda la jerarquía
+	+ Operación de busqueda muy simple
+	- Sin embargo, mucho espacio en blanco y si se cambia la jerarquía, la tabla tiene que modificarse.
+
+Opción 2 -> Tabla hijo1, hijo2, ... hijoN con propiedades heredadas
+	- Busqueda más compleja
+	+ No se desperdicia espacio en blanco
+
+Opción 3 -> Tabla hijo1, hijo2, ... hijoN SOLO con 1 claveAjena
+	++ Máxima flexibilidad
+	- Busqueda más compleja
+	+ No se desperdicia espacio en blanco
+
+
+
+#######
+Video 3 -- EL PATRÓN DAO
+#######
+
+Patrón de diseño que actua como un puente de implementacion entre la capa de persistencia y lógica.
+Encapsula la lógica necesaria para que los datos pueden ir y venir de ambas capas.
+ESTRUCTURA: (Ver adjunto)
+	1. Obj de negocio: Delega operaciones LoE
+	2. Obj de Acceso a datos (DAO): Abstrae la capa de negocio de la impl del acceso a datos.
+	3. Obj de Transferencia de datos (DTO): 
+	4. Fuente de datos
+
+Ventajas de todo esto:
+Acceso a datos centrado en un nivel.
+Menos complejidad en la capa de negocios.
+Migración más fácil - Con reemplazar la capa de DAO ya podemos cambiar a un gestor de datos diferente.
+
+
+
+#######
+Video 3 -- EL PATRÓN DAO, IMPLEMENTACIÓN
+#######
+
+1. Partimos de las clases de la lógica de negocio.
+2. Impl una clase DTO por cada clase del dominio a utilizar.
+3. Definimos una interfaz para cada DAO con operaciones CRUD.
+4. Impl una clase que proporciona el código para la funcionalidad de cada interfaz.
+
+
+
+#######
+Video EXTRA -- EL PATRÓN SINGLETON
+#######
+
+Problema: Acceder a un obj de clase desde cualquier punto de la aplicación
+Una clase definida de este patrón solo dispondrá de una instancia (1 objeto)
+
+public class Singleton {
+	private static Singleton INSTANCIA = new Singleton();
+	private Singleton() {...}
+	public static Singleton getInstancia() {
+		return INSTANCIA;
+	}
+
+Para obtener la referencia de la clase:
+	Singleton referencia = Singleton.getInstancia();
+}
+
+
