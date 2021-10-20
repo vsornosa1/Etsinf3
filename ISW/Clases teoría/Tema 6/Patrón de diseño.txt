@@ -71,7 +71,7 @@ ESTRUCTURA: (Ver adjunto)
 	1. Obj de negocio: Delega operaciones LoE
 	2. Obj de Acceso a datos (DAO): Abstrae la capa de negocio de la impl del acceso a datos.
 	3. Obj de Transferencia de datos (DTO): 
-	4. Fuente de datos
+	4. Fuente de datos (DAL - Data Access Layer)
 
 Ventajas de todo esto:
 Acceso a datos centrado en un nivel.
