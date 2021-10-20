@@ -1,0 +1,11 @@
+Operaciones que pueden afectar / poner en peligro la Integridad Referencial (IR) de una clave ajena (S):
+	1. Borrar una fila en R
+	2. Insertar una fila en S
+	3. Modificar el atributo en común de R
+	3. Modificar el atributo en común de S
+
+Si alguna de estas ocurre, el SGBD hace una de las siguientes:
+	1. Rechazar la operación. (Operación restrictiva)
+	2. Borrado/Modificado en S (borrado/modificado en cascada - todas las filas en relación con la misma)
+	3. Poner nulos en la Clave ajena.
+
