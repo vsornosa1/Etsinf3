@@ -1,0 +1,60 @@
+empresa [pieza tipo cantidad]^m [pedido-producto gama numero]^m)
+
+cantidad,numero  E  INTEGER 
+tipo  E  {A,B}
+gama  E  {media,alta,suprema}
+
+EJERCICIO 1:
+(deffacts datos
+
+	;;PATRON DINAMICO
+	(empresa pieza A 10 pieza B 15 pedido-producto media 2 alta 1 suprema 1)
+
+	;;PATRONES ESTATICOS
+	(gama media A 3 B 1)
+	(gama alta A 2 B 2)
+	(gama suprema A 0 B 3)
+)
+
+
+
+EJERCICIO 2:
+(defrule servir_uno_gamaX
+	(empresa pieza A ?nA pieza B ?nB $?x pedido-producto ?gama ?nPedidos $?y)
+	(gama ?gama A ?costeA B ?costeB)
+	
+	(test (> ?nPedidos 0))
+	(test (and (< ?nA ?costeA)(< ?nB ?costeB)))
+
+	=>
+
+	(assert (empresa pieza A (- ?nA ?precioA) pieza B (- ?nB ?precioB) $?x pedido-producto ?gama (-?nPedidos 1) $?y))
+)
+
+
+
+
+EJERCICIO 3:
+(defrule servir_todos_gamaX
+	(empresa pieza A ?nA pieza B ?nB ?$x pedido-producto ?gama ?nPedidos $?y)
+	(gama ?gama A ?costeA B ?costeB)
+	(test (> ?nPedidos 0))
+	(test (and (<= ?nA (* ?nPedidos ?costeA))(<= ?nB (* ?nPedidos ?costeB))))
+	=>
+	(assert (empresa pieza A (- ?nA (* ?nPedidos ?costeA)) pieza B (- ?nB (* ?nPedidos ?costeB)) $?x pedido-producto ?gama 0 $?y))
+)
+
+
+
+
+EJERCICIO 4:
+(defrule servir_todos_gamaX
+	(empresa pieza A ?nA pieza B ?nB ?$x pedido-producto ?gama1 ?nPedidos1 $?y pedido-producto ?gama2 ?nPedidos2)
+	(gama ?gama1 A ?costeA1 B ?costeB1)
+	(gama ?gama2 A ?costeA2 B ?costeB2)
+
+	(test (and (> ?nPedidos1 0)(> ?nPedidos2 0))
+	(test (or (< ?nA (+ ?nPedidos1 ?nPedidos2))(< ?nB (+ ?nPedidos1 ?nPedidos2))))
+	=>
+	(assert (empresa pieza A (- ?nA (* ?nPedidos ?costeA)) pieza B (- ?nB (* ?nPedidos ?costeB)) $?x pedido-producto ?gama 0 $?y))
+)
