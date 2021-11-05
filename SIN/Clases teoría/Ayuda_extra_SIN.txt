@@ -1,0 +1,30 @@
+En un MAX:
+	¿Hay un Beta mayor por encima? Sí -> Corte
+En un MIN:
+	¿Hay un Alfa mayor por encima? Sí -> Corte
+
+EL AlfaBeta es un MinMax pero con cortes.
+
+A* encuentra la optima solo si se usa un heurístico admisible.
+Graph search + consistente = optimo
+
+Algoritmo A:
+f(n) = g(n) + h(n) = El camino hasta el nodo + el peso del nodo
+	1. Expandes A
+	2. Tienes BCD (open) y A entra en closed
+	3. Se elige el minimo de BCD, se cierra y se expande.
+	4. Se reevalua entre los nodos abiertos y se repite el proceso.
+
+
+	length nombreLista
+
+HEURISTICA:
+admisible: heurisitcaNode < coste
+consistente: heuristicaNodoActual < heristicaHijo + costeCaminoNodoAHijo
+
+Corte beta es en capa MAX
+Corte alfa es en capa MIN
+
+Si el nodo no tien probabilidad de subir se corta entre la subida y el nodo
+
+heuristica de un nodo solucion es 0
