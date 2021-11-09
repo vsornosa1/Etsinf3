@@ -1,0 +1,13 @@
+(empresa [pieza tipo cantidad]^m [pedido-producto gama numero]^m)
+
+cantidad,numero  E  INTEGER 
+tipo  E  {A,B}
+gama  E  {media,alta,suprema}
+
+Ejercicio 1:
+	(empresa pieza A 10)
+	(empresa pieza B 15)
+	(empresa pedido-producto media 2)
+	(empresa pedido-producto alta 1)
+	(empresa pedido-producto suprema 1)
+
