@@ -8,7 +8,7 @@ public class Curso
     private Profesor imparte;
     private ICollection<Reserva> reservaS;
 
-    public Curso(string nombre, string precio, DateTime fecha_insercion, Administrador oferta, Profesor imparte)
+    public Curso(string nombre, int precio, DateTime fecha_insercion, Administrador oferta, Profesor imparte)
     {
         this.nombre = nombre;
         this.precio = precio;

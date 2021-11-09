@@ -6,9 +6,4 @@ public abstract class Persona
     {
         this.dni = dni;
     }
-
-    public string getDni()
-    {
-        return this.dni;
-    }
 }
