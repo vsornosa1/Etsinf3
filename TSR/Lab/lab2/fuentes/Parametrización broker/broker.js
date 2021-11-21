@@ -5,10 +5,12 @@ let sw = zmq.socket('router'); // Backend
 const frontendURL = process.argv[2];
 const backendURL = process.argv[3];
 
-sc.bind(frontendURL);
-sw.bind(backendURL);
+sc.bind('tcp://*:' + frontendURL);
+sw.bind('tcp://*:' + backendURL);
 
 let clients = [], msgQueue = [], workers = [];
+let nRequests = 0;
+let workersCount = {};
 
 sc.on('message', (c, sep, m) => {
     if (workers.length == 0) {
@@ -28,5 +30,21 @@ sw.on('message', (w, sep, c, sep2, r) => {
         sw.send([w, '', clients.shift(), '', msgQueue.shift()])
         : workers.push(w);
 
-    sc.send([c, '', r]);
+        if (workersCount[w]) {
+            workersCount[w]++
+        }
+        else {
+            workersCount[w] = 1
+        }
+
+    ++nRequests;
+    let finalMsg = ' ' + nRequests;
+    sc.send([c, '', r + finalMsg]);
 });
+
+setInterval(() => { 
+    console.log('Numero de peticiones totales: ' + nRequests);
+    for(const w in workersCount) {
+        console.log('  El ' + w + ' ha completado ' + workersCount[w] + ' peticiones.\n');
+    }
+}, 5000);
