@@ -1,10 +1,11 @@
 const zmq = require('zeromq');
 let req = zmq.socket('req');
 
-req.connect('tcp://localhost:9998');
+req.identity = 'Client' + process.pid;
+req.connect('tcp://localhost:8000');
 
 req.on('message', (msg) => {
-    console.log('resp: ' + msg);
+    console.log('\nRespuesta: ' + msg + '\n');
     process.exit(0);
 })
 
