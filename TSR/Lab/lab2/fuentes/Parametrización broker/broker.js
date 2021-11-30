@@ -2,11 +2,11 @@ const zmq = require('zeromq');
 let sc = zmq.socket('router'); // Frontend
 let sw = zmq.socket('router'); // Backend
 
-const frontendURL = process.argv[2];
-const backendURL = process.argv[3];
+const frontendPort = process.argv[2];
+const backendPort = process.argv[3];
 
-sc.bind('tcp://*:' + frontendURL);
-sw.bind('tcp://*:' + backendURL);
+sc.bind('tcp://*:' + frontendPort);
+sw.bind('tcp://*:' + backendPort);
 
 let clients = [], msgQueue = [], workers = [];
 let nRequests = 0;
