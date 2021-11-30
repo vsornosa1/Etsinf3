@@ -1,0 +1,4 @@
+Ciclo: 5, Señal: IFstall; Instrucción trap 0
+Ciclo: 6, Señal: IFstall; Instrucción trap 0
+Ciclo: 7, Señal: IFstall; Instrucción trap 0
+Ciclo: 8, Señal: IFstall; Instrucción trap 0
