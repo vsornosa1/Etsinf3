@@ -1,0 +1,28 @@
+./matrix1
+n = 8, 0.512 Gflop/s
+n = 16, 0.683 Gflop/s
+n = 32, 0.690 Gflop/s
+n = 64, 0.594 Gflop/s
+n = 128, 1.077 Gflop/s
+n = 256, 1.598 Gflop/s
+n = 512, 1.365 Gflop/s
+n = 1024, 0.798 Gflop/s
+n = 2048, 0.259 Gflop/s
+
+./matrix2
+ijk:    n = 1024, 0.517 Gflop/s                                                                                                     
+ikj:    n = 1024, 0.147 Gflop/s                                                                                                     
+jik:    n = 1024, 0.504 Gflop/s                                                                                                     
+jki:    n = 1024, 11.072 Gflop/s                                                                                                    
+kij:    n = 1024, 0.146 Gflop/s                                                                                                     
+kji:    n = 1024, 8.518 Gflop/s  
+
+./matrix3
+n = 8, 0.341 Gflop/s
+n = 16, 0.482 Gflop/s
+n = 32, 0.293 Gflop/s
+n = 64, 0.256 Gflop/s
+n = 128, 0.325 Gflop/s
+n = 256, 0.373 Gflop/s
+n = 512, 0.137 Gflop/s
+n = 1024, 0.059 Gflop/s
