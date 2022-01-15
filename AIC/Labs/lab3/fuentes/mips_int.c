@@ -696,7 +696,7 @@ void detectar_riesgos_datos(void) {
                 ((lee_Rfte1(ID_EX.IR)) ||
                 (lee_Rfte2(ID_EX.IR))) && 
                 ((ID_EX_t.IR.Rdestino == IF_ID_t.IR.Rfuente1) ||
-                (ID_EX_t.IR.Rdestino == IF ID_t.IR.Rfuente2))) {
+                (ID_EX_t.IR.Rdestino == IF_ID_t.IR.Rfuente2))) {
                     IFstall=SI;
                     IDstall=SI;
             }
